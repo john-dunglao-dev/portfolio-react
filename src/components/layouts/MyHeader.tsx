@@ -1,8 +1,6 @@
 import myLogo from '../../assets/svgs/logo-v2-mini.drawio.svg';
 import { ListIcon } from '@phosphor-icons/react';
 import Navigation from './Navigation';
-import { createPortal } from 'react-dom';
-import clsx from 'clsx';
 import { Fragment, useState } from 'react';
 import {
   Dialog,
@@ -10,6 +8,7 @@ import {
   Transition,
   TransitionChild,
 } from '@headlessui/react';
+import { Link } from 'react-router-dom';
 
 function MyHeader() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,10 +20,12 @@ function MyHeader() {
   return (
     <header className="bg-primary/90 shadow backdrop-blur-[2px] px-4 flex justify-between">
       <div className="flex items-center gap-2">
-        <img src={myLogo} className="h-12 w-12" alt="Logo" />
-        <h1 className="text-2xl font-bold text-background">
-          John Florentino Dunglao
-        </h1>
+        <Link to="/">
+          <img src={myLogo} className="h-12 w-12" alt="Logo" />
+          <h1 className="hidden sm:block text-2xl font-bold text-background">
+            John Florentino Dunglao
+          </h1>
+        </Link>
       </div>
 
       <button
