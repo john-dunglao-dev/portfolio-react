@@ -1,0 +1,272 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dracula (&:where(.dracula, .dracula *));
+@custom-variant nord (&:where(.nord, .nord *));
+@custom-variant monokai (&:where(.monokai, .monokai *));
+@custom-variant solarized-dark (&:where(.solarized-dark, .solarized-dark *));
+@custom-variant solarized-light (&:where(.solarized-light, .solarized-light *));
+@custom-variant github (&:where(.github, .github *));
+@custom-variant github-dark (&:where(.github-dark, .github-dark *));
+@custom-variant one-dark (&:where(.one-dark, .one-dark *));
+@custom-variant material (&:where(.material, .material *));
+@custom-variant high-contrast (&:where(.high-contrast, .high-contrast *));
+@custom-variant sepia (&:where(.sepia, .sepia *));
+@custom-variant synthwave (&:where(.synthwave, .synthwave *));
+@custom-variant forest (&:where(.forest, .forest *));
+@custom-variant ocean (&:where(.ocean, .ocean *));
+
+/* Light Theme (Default) */
+/**
+ * Note that the default theme colors are defined here. We can override these in the html selector for different themes.
+ */
+@theme {
+  /** Generate a color palette for Light Theme that complements with the Primary color var(--color-blue-900) */
+  --color-primary: #2563eb;
+  --color-secondary: #10b981;
+  --color-background: #ffffff;
+  --color-foreground: #1f2937;
+  --color-comment: #6b7280;
+  --color-selection: #93c5fd;
+  --color-reserved-word: #3b82f6;
+  --color-function: #22c55e;
+
+  --default-font-family:
+    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    Segoe UI Symbol, 'Noto Color Emoji';
+}
+
+@layer base {
+  /* Dark Theme */
+  html.dark {
+    --color-primary: #f97316;
+    --color-secondary: #3b82f6;
+    --color-background: #111827;
+    --color-foreground: #f9fafb;
+    --color-comment: #9ca3af;
+    --color-selection: #1e3a8a;
+    --color-reserved-word: #b91c1c;
+    --color-function: #50fa7b;
+  }
+
+  /* Dracula Theme */
+  html.dracula {
+    --color-primary: #ff79c6;
+    --color-secondary: #8be9fd;
+    --color-background: #282a36;
+    --color-foreground: #f8f8f2;
+    --color-comment: #6272a4;
+    --color-selection: #44475a;
+    --color-reserved-word: #bd93f9;
+    --color-function: #50fa7b;
+  }
+
+  /* Nord Theme */
+  html.nord {
+    --color-primary: #88c0d0;
+    --color-secondary: #81a1c1;
+    --color-background: #2e3440;
+    --color-foreground: #eceff4;
+    --color-comment: #616e88;
+    --color-selection: #3b4252;
+  }
+
+  /* Monokai Theme */
+  html.monokai {
+    --color-primary: #f92672;
+    --color-secondary: #a6e22e;
+    --color-background: #272822;
+    --color-foreground: #f8f8f2;
+    --color-comment: #75715e;
+    --color-selection: #49483e;
+  }
+
+  /* Solarized Dark Theme */
+  html.solarized-dark {
+    --color-primary: #268bd2;
+    --color-secondary: #2aa198;
+    --color-background: #002b36;
+    --color-foreground: #839496;
+    --color-comment: #586e75;
+    --color-selection: #073642;
+  }
+
+  /* Solarized Light Theme */
+  html.solarized-light {
+    --color-primary: #268bd2;
+    --color-secondary: #2aa198;
+    --color-background: #fdf6e3;
+    --color-foreground: #657b83;
+    --color-comment: #93a1a1;
+    --color-selection: #eee8d5;
+  }
+
+  /* GitHub Theme */
+  html.github {
+    --color-primary: #0969da;
+    --color-secondary: #1f883d;
+    --color-background: #ffffff;
+    --color-foreground: #24292f;
+    --color-comment: #656d76;
+    --color-selection: #096bda;
+  }
+
+  /* GitHub Dark Theme */
+  html.github-dark {
+    --color-primary: #58a6ff;
+    --color-secondary: #56d364;
+    --color-background: #0d1117;
+    --color-foreground: #f0f6fc;
+    --color-comment: #8b949e;
+    --color-selection: #264f78;
+  }
+
+  /* One Dark Theme */
+  html.one-dark {
+    --color-primary: #e06c75;
+    --color-secondary: #98c379;
+    --color-background: #282c34;
+    --color-foreground: #abb2bf;
+    --color-comment: #5c6370;
+    --color-selection: #3e4451;
+  }
+
+  /* Material Theme */
+  html.material {
+    --color-primary: #ff5722;
+    --color-secondary: #4caf50;
+    --color-background: #263238;
+    --color-foreground: #eeffff;
+    --color-comment: #546e7a;
+    --color-selection: #37474f;
+  }
+
+  /* High Contrast Theme */
+  html.high-contrast {
+    --color-primary: #ffff00;
+    --color-secondary: #00ffff;
+    --color-background: #000000;
+    --color-foreground: #ffffff;
+    --color-comment: #aaaaaa;
+    --color-selection: #0078d4;
+  }
+
+  /* Sepia Theme */
+  html.sepia {
+    --color-primary: #8b4513;
+    --color-secondary: #d2691e;
+    --color-background: #f5f5dc;
+    --color-foreground: #5d4037;
+    --color-comment: #8d6e63;
+    --color-selection: #deb887;
+  }
+
+  /* Synthwave Theme */
+  html.synthwave {
+    --color-primary: #ff6b9d;
+    --color-secondary: #00f5ff;
+    --color-background: #2a0e61;
+    --color-foreground: #ffffff;
+    --color-comment: #b877db;
+    --color-selection: #4a1b7a;
+  }
+
+  /* Forest Theme */
+  html.forest {
+    --color-primary: #4caf50;
+    --color-secondary: #8bc34a;
+    --color-background: #1b5e20;
+    --color-foreground: #e8f5e8;
+    --color-comment: #66bb6a;
+    --color-selection: #2e7d32;
+  }
+
+  /* Ocean Theme */
+  html.ocean {
+    --color-primary: #0ea5e9;
+    --color-secondary: #06b6d4;
+    --color-background: #0c4a6e;
+    --color-foreground: #e0f7fa;
+    --color-comment: #4dd0e1;
+    --color-selection: #0369a1;
+  }
+
+  * {
+    list-style-type: none; /* Remove default list styles */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: var(--text-base);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-primary);
+    line-height: var(--leading-normal);
+  }
+
+  h1 {
+    font-size: var(--text-6xl);
+  }
+
+  h2 {
+    font-size: var(--text-5xl);
+  }
+
+  h3 {
+    font-size: var(--text-4xl);
+  }
+
+  h4 {
+    font-size: var(--text-3xl);
+  }
+
+  h5 {
+    font-size: var(--text-2xl);
+  }
+
+  h6 {
+    font-size: var(--text-xl);
+  }
+
+  p,
+  span,
+  div,
+  li,
+  td,
+  th,
+  label,
+  input,
+  textarea,
+  button,
+  select {
+    color: var(--color-foreground);
+    font-weight: var(--font-weight-light);
+  }
+
+  a {
+    color: var(--color-secondary);
+    text-decoration: none;
+  }
+
+  em,
+  i,
+  strong,
+  b {
+    color: var(--color-reserved-word);
+  }
+
+  ::selection {
+    background-color: var(--color-selection);
+    color: var(--color-foreground);
+    text-shadow: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
