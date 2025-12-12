@@ -1,0 +1,18 @@
+export const Themes = {
+  LIGHT: 'light',
+  DARK: 'dark',
+  DRACULA: 'dracula',
+  NORD: 'nord',
+  MONOKAI: 'monokai',
+  SOLARIZED_DARK: 'solarized-dark',
+  SOLARIZED_LIGHT: 'solarized-light',
+  GITHUB: 'github',
+  GITHUB_DARK: 'github-dark',
+  ONE_DARK: 'one-dark',
+  MATERIAL: 'material',
+  HIGH_CONTRAST: 'high-contrast',
+  SEPIA: 'sepia',
+  SYNTHWAVE: 'synthwave',
+  FOREST: 'forest',
+  OCEAN: 'ocean',
+} as const;

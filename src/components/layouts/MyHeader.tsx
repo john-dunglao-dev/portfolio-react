@@ -18,7 +18,7 @@ function MyHeader() {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full bg-primary/90 shadow backdrop-blur-[2px]">
+    <div className="fixed top-0 left-0 w-full bg-primary/90 shadow backdrop-blur-[2px] z-10">
       <header className="flex justify-between container mx-auto px-4 md:px-0">
         <div>
           <Link to="/" className="flex items-center gap-2">
