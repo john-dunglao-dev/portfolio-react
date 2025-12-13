@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import myPic from '../../assets/imgs/me_thinking.jpg';
 import { Transition } from '@headlessui/react';
+import { SmileyAngryIcon, SmileyIcon } from '@phosphor-icons/react';
+import clsx from 'clsx';
 
 function MouseFollower() {
   const followerRef = useRef<HTMLDivElement>(null);
@@ -32,10 +34,15 @@ function MouseFollower() {
   return (
     <>
       <button
-        className="px-2 py-1 text-foreground border border-foreground rounded hidden lg:inline"
+        className={clsx(
+          'px-2 py-1  border rounded hidden lg:inline',
+          showFunny
+            ? 'border-red-400 text-red-400'
+            : 'border-foreground text-foreground'
+        )}
         onClick={handleChangeFollower}
       >
-        {showFunny ? "I don't want to see it anymore" : 'Show Something Funny?'}
+        {showFunny ? <SmileyAngryIcon size={20} /> : <SmileyIcon size={20} />}
       </button>
 
       {createPortal(

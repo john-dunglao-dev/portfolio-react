@@ -1,4 +1,5 @@
 import {
+  FileMagnifyingGlassIcon,
   EnvelopeOpenIcon,
   GithubLogoIcon,
   LinkedinLogoIcon,
@@ -8,6 +9,7 @@ import { timeline } from '../components/lists/timeline/models/TimelineData';
 import ContactForm from '../components/forms/ContactForm';
 import ThemeChanger from '../components/layouts/ThemeChanger';
 import MouseFollower from '../components/layouts/MouseFollower';
+import myCv from '../assets/pdfs/john-florentino-dunglao-cv.pdf';
 
 function MinimalPortfolioPage() {
   return (
@@ -15,7 +17,9 @@ function MinimalPortfolioPage() {
       <section id="me" className="lg:row-span-3 lg:col-span-6 relative">
         <div className="sticky top-18 left-0 flex flex-col justify-between lg:h-full lg:max-h-[calc(100lvh-200px)]">
           <div>
-            <h1 className="text-4xl md:text-6xl">John Florentino Dunglao</h1>
+            <h1 className="text-4xl md:text-[3.5rem] font-merriweather">
+              John Florentino Dunglao
+            </h1>
             <h3 className="text-2xl md:text-4xl mt-3">Senior Web Developer</h3>
             <p className="mt-6">
               A full-stack web developer that acquires techniques for my own
@@ -25,46 +29,73 @@ function MinimalPortfolioPage() {
             <nav className="mt-10 hidden lg:block">
               <ul>
                 <li>
-                  <a href="#summary">Summary</a>
+                  <a
+                    href="#summary"
+                    className="hover:text-foreground transition-colors duration-300 ease-in-out"
+                  >
+                    Summary
+                  </a>
                 </li>
                 <li>
-                  <a href="#timeline">Experience</a>
+                  <a
+                    href="#timeline"
+                    className="hover:text-foreground transition-colors duration-300 ease-in-out"
+                  >
+                    Experience
+                  </a>
                 </li>
                 <li>
-                  <a href="#contact">Contact</a>
+                  <a
+                    href="#contact"
+                    className="hover:text-foreground transition-colors duration-300 ease-in-out"
+                  >
+                    Contact
+                  </a>
                 </li>
               </ul>
             </nav>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-2">
-            <a href="mailto:jfsdunglao@gmail.com">
-              <EnvelopeOpenIcon
-                size={32}
-                className="text-primary inline-block"
-              />
+            <a
+              href="mailto:jfsdunglao@gmail.com"
+              className="text-primary hover:text-foreground transition-colors duration-300 ease-in-out"
+              title="Send me an email?"
+            >
+              <EnvelopeOpenIcon size={32} className="inline-block" />
             </a>
 
             <a
               href="https://www.linkedin.com/in/johnflorentinodunglao/"
+              className="text-primary hover:text-foreground transition-colors duration-300 ease-in-out"
               target="_blank"
               rel="noopener noreferrer"
+              title="Go to my profile in LinkedIn"
             >
-              <LinkedinLogoIcon
-                size={32}
-                className="text-primary inline-block"
-              />
+              <LinkedinLogoIcon size={32} className="inline-block" />
             </a>
 
             <a
               href="https://github.com/john-dunglao-dev"
+              className="text-primary hover:text-foreground transition-colors duration-300 ease-in-out"
               target="_blank"
               rel="noopener noreferrer"
+              title="Check my Github account"
             >
-              <GithubLogoIcon size={32} className="text-primary inline-block" />
+              <GithubLogoIcon size={32} className="inline-block" />
             </a>
 
             <ThemeChanger />
+
+            <a
+              href={myCv}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-1 px-4 border border-foreground text-foreground rounded bg-transparent hover:bg-primary/10 hover:border-primary hover:text-primary transition-colors duration-300 ease-in-out inline-flex items-center w-fit gap-1"
+            >
+              <FileMagnifyingGlassIcon size={20} className="inline-block" />
+              View my CV
+            </a>
 
             <MouseFollower />
           </div>
