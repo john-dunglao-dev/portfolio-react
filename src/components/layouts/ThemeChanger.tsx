@@ -40,7 +40,7 @@ function ThemeChanger() {
 
   const storageTheme = localStorage.getItem('selectedTheme');
   const [selectedTheme, setSelectedTheme] = useState(
-    storageTheme ? JSON.parse(storageTheme) : themeOptions[0]
+    storageTheme ? JSON.parse(storageTheme) : themeOptions[9]
   );
   document.documentElement.setAttribute('class', selectedTheme.value);
 
