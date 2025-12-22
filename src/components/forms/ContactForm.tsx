@@ -1,6 +1,12 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useState, type ChangeEvent, type FormEvent, type JSX } from 'react';
+import { ArrowClockwiseIcon } from '@phosphor-icons/react';
+import NoticeModal from '../layouts/modal/NoticeModal';
+import { type NoticeType } from '../layouts/modal/NoticeModal';
 
 function ContactForm() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [noticeModalType, setNoticeModalType] = useState<NoticeType>('success');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -8,6 +14,25 @@ function ContactForm() {
     message: '',
     sendCopy: false,
   });
+
+  const formNoticeModal: Record<NoticeType, JSX.Element | null> = {
+    success: (
+      <NoticeModal
+        show={isModalOpen}
+        message="Your email has been sent! I'll get back to you shortly."
+        noticeType="success"
+      />
+    ),
+    error: (
+      <NoticeModal
+        show={isModalOpen}
+        message="There was an error sending your email. Please try again later."
+        noticeType="error"
+      />
+    ),
+    info: null,
+    warning: null,
+  };
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -29,6 +54,7 @@ function ContactForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
 
     console.debug('Sending contact form data:', formData);
     console.debug(
@@ -51,9 +77,23 @@ function ContactForm() {
       })
       .then((data) => {
         console.log('Success:', data);
+        setNoticeModalType('success');
+        setIsModalOpen(true);
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+          sendCopy: formData.sendCopy,
+        });
       })
       .catch((error) => {
         console.error('Error:', error);
+        setNoticeModalType('error');
+        setIsModalOpen(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -145,7 +185,7 @@ function ContactForm() {
           <label className="inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
-              className="form-checkbox h-4 w-4 text-primary"
+              className="form-checkbox h-5 w-5 text-primary accent-selection"
               name="sendCopy"
               checked={formData.sendCopy}
               onChange={handleCheckboxChange}
@@ -161,10 +201,15 @@ function ContactForm() {
             type="submit"
             className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition-colors duration-300"
           >
-            Send Message
+            {isLoading && (
+              <ArrowClockwiseIcon className="animate-spin h-4 w-4 mr-2 inline-block" />
+            )}
+            {isLoading ? 'Sending...' : 'Send Message'}
           </button>
         </div>
       </form>
+
+      {isModalOpen && formNoticeModal[noticeModalType]}
     </>
   );
 }
