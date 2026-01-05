@@ -66,7 +66,7 @@ function MinimalPortfolioPage() {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/johnflorentinodunglao/"
+              href="https://www.linkedin.com/in/jfsdunglao/"
               className="text-primary hover:text-foreground transition-colors duration-300 ease-in-out"
               target="_blank"
               rel="noopener noreferrer"
