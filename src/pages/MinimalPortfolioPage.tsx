@@ -10,11 +10,21 @@ import ContactForm from '../components/forms/ContactForm';
 import ThemeChanger from '../components/layouts/ThemeChanger';
 import MouseFollower from '../components/layouts/MouseFollower';
 import myCv from '../assets/pdfs/john-florentino-dunglao-cv.pdf';
+import { useState } from 'react';
+import SkillList from '../components/lists/skills/SkillList';
+import {
+  backendSkills,
+  devOpsSkills,
+  frontendSkills,
+  otherSkills,
+} from '../components/lists/skills/models/Skill';
 
 function MinimalPortfolioPage() {
+  const [searchSkill, setSearchSkill] = useState<string>('');
+
   return (
     <main className="grid grid-cols-1 lg:grid-cols-12 gap-4 py-6 selection:bg-selection">
-      <section id="me" className="lg:row-span-3 lg:col-span-6 relative">
+      <section id="me" className="lg:row-span-4 lg:col-span-6 relative">
         <div className="sticky top-18 left-0 flex flex-col justify-between lg:h-full lg:max-h-[calc(100lvh-200px)]">
           <div>
             <h1 className="text-4xl md:text-[3.5rem] font-merriweather">
@@ -140,7 +150,51 @@ function MinimalPortfolioPage() {
         </h4>
 
         <div>
-          <TimelineList items={timeline} />
+          <input
+            type="text"
+            placeholder="Search skill to highlight..."
+            value={searchSkill}
+            onChange={(e) => setSearchSkill(e.target.value)}
+            className="w-full mb-4 py-2 px-4 border border-secondary/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 ease-in-out bg-background text-foreground"
+          />
+        </div>
+
+        <div>
+          <TimelineList items={timeline} highlight={searchSkill} />
+        </div>
+      </section>
+
+      <section id="skills" className="md:col-span-6 space-y-4">
+        <div className="lg:hidden sticky top-0 left-0 z-2">
+          <h4 className="bg-transparent backdrop-blur-sm">Full Skill List</h4>
+        </div>
+
+        <div className="space-y-2">
+          <div>
+            Frontend <span className="hidden lg:inline">Skills</span>
+          </div>
+          <SkillList items={frontendSkills} highlight={searchSkill} />
+        </div>
+
+        <div className="space-y-2">
+          <div>
+            Backend <span className="hidden lg:inline">Skills</span>
+          </div>
+          <SkillList items={backendSkills} highlight={searchSkill} />
+        </div>
+
+        <div className="space-y-2">
+          <div>
+            DevOps <span className="hidden lg:inline">Skills</span>
+          </div>
+          <SkillList items={devOpsSkills} highlight={searchSkill} />
+        </div>
+
+        <div className="space-y-2">
+          <div>
+            Other <span className="hidden lg:inline">Skills</span>
+          </div>
+          <SkillList items={otherSkills} highlight={searchSkill} />
         </div>
       </section>
 
