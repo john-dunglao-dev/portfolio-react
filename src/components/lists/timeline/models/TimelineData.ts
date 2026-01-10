@@ -102,6 +102,7 @@ export const timeline: TimelineListItem[] = [
       { name: 'PostgreSQL', icon: 'postgresql-icon' },
       { name: 'WebSocket', icon: '' },
     ],
+    link: 'https://mftgroup.com.ph/',
   },
   {
     from: 'Aug 2017',
@@ -119,5 +120,6 @@ export const timeline: TimelineListItem[] = [
       { name: 'MySQL', icon: 'mysql-icon' },
       { name: 'Laravel', icon: 'laravel-icon' },
     ],
+    link: 'https://john-dunglao-dev.github.io/developer-ako/',
   },
 ];
