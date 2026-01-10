@@ -82,6 +82,8 @@ export const timeline: TimelineListItem[] = [
       { name: 'jQuery', icon: 'jquery-icon' },
       { name: 'WebSocket', icon: '' },
       { name: 'CSS3', icon: 'css3-icon' },
+      { name: 'Apache', icon: 'apache-icon' },
+      { name: 'Nginx', icon: 'nginx-icon' },
     ],
   },
   {
