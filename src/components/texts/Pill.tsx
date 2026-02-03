@@ -1,7 +1,12 @@
 import type { PillProps } from './models/Pill';
 
-function Pill({ text, className }: PillProps) {
-  return <span className={className}>{text}</span>;
+function Pill({ text, className, icon }: PillProps) {
+  return (
+    <span className={className}>
+      {icon}
+      {text}
+    </span>
+  );
 }
 
 export default Pill;

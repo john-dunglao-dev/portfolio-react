@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import Pill from '../../texts/Pill';
-import type { TechnologyStack } from '../timeline/models/Timeline';
+import SkillIcon from './SkillIcon';
+import type { ISkill } from './models/Skill';
 
 interface SkillListProps {
-  items: TechnologyStack[];
+  items: ISkill[];
   highlight: string;
 }
 
@@ -14,8 +15,9 @@ function SkillList({ items, highlight }: SkillListProps) {
         <Pill
           key={index}
           text={tech.name}
+          icon={tech.icon && <SkillIcon className={clsx(tech.icon, 'mr-1')} />}
           className={clsx(
-            'py-0.5 px-2 border text-[0.75rem] rounded-md',
+            'py-0.5 px-2 border text-[0.75rem] rounded-md flex justify-center items-center',
             highlight &&
               tech.name.toLowerCase().includes(highlight.toLowerCase())
               ? 'border-primary text-primary bg-primary/10'

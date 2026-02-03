@@ -1,7 +1,4 @@
-export interface TechnologyStack {
-  name: string;
-  icon: string;
-}
+import type { ISkill } from '../../skills/models/Skill';
 
 export interface TimelineListItem {
   from: string;
@@ -9,7 +6,7 @@ export interface TimelineListItem {
   title: string;
   company: string;
   description: string;
-  stack?: TechnologyStack[];
+  stack?: ISkill[];
   link?: string;
 }
 

@@ -1,4 +1,33 @@
 import type { TimelineListItem } from './Timeline';
+import {
+  frontendSkills,
+  backendSkills,
+  devOpsSkills,
+  otherSkills,
+  type ISkill,
+} from '../../skills/models/Skill';
+
+const skillReduce = (acc: Record<string, ISkill>, skill: ISkill) => {
+  acc[skill.name] = skill;
+  return acc;
+};
+
+const frontendDict = frontendSkills.reduce(
+  skillReduce,
+  {} as Record<string, ISkill>
+);
+
+const backendDict = backendSkills.reduce(
+  skillReduce,
+  {} as Record<string, ISkill>
+);
+
+const devOpsDict = devOpsSkills.reduce(
+  skillReduce,
+  {} as Record<string, ISkill>
+);
+
+const otherDict = otherSkills.reduce(skillReduce, {} as Record<string, ISkill>);
 
 export const timeline: TimelineListItem[] = [
   {
@@ -9,20 +38,20 @@ export const timeline: TimelineListItem[] = [
     description:
       'A business-to-business SaaS platform that streamlines procurement by connecting hospitality venues with wholesale food and beverage suppliers. It centralizes ordering, pricing, and supplier management into a single system, allowing buyers to source ingredients efficiently while enabling suppliers to scale their reach and order volume. FoodByUs effectively removes manual workflows, reduces costs, and provides full visibility across the purchasing lifecycle. More on Frontend-focused development maintaining and developing new features in a pre-existing website.',
     stack: [
-      { name: 'Vue', icon: 'vue-icon' },
-      { name: 'Node.js', icon: 'nodejs-icon' },
-      { name: 'TypeScript', icon: 'typescript-icon' },
-      { name: 'MySQL', icon: 'mysql-icon' },
-      { name: 'Docker', icon: 'docker-icon' },
-      { name: 'ElasticSearch', icon: 'elasticsearch-icon' },
-      { name: 'Redis', icon: 'redis-icon' },
-      { name: 'PHP', icon: 'php-icon' },
-      { name: 'Laravel', icon: 'laravel-icon' },
-      { name: 'Figma', icon: 'figma-icon' },
-      { name: 'Storybook', icon: 'storybook-icon' },
-      { name: 'TailwindCSS', icon: 'tailwindcss-icon' },
-      { name: 'Ubuntu', icon: 'ubuntu-icon' },
-      { name: 'Nginx', icon: 'nginx-icon' },
+      frontendDict['Vue'],
+      backendDict['Node.js'],
+      frontendDict['TypeScript'],
+      backendDict['MySQL'],
+      devOpsDict['Docker'],
+      backendDict['ElasticSearch'],
+      backendDict['Redis'],
+      backendDict['PHP'],
+      backendDict['Laravel'],
+      otherDict['Figma'],
+      otherDict['Storybook'],
+      frontendDict['Tailwind CSS'],
+      devOpsDict['Ubuntu'],
+      devOpsDict['Nginx'],
     ],
     link: 'https://foodbyus.com',
   },
@@ -35,31 +64,31 @@ export const timeline: TimelineListItem[] = [
       'Provided end-to-end freelance development support across multiple domains, including assisting a casino operator with licensing and integration of their randomizer application, duplicating and extending casino web platforms for another client with new features that consumed and displayed live sports data, and leading the backend API architecture and admin dashboard development for a taxi service application. These engagements required rapid delivery, cross-functional coordination, and ownership of both technical implementation and solution design.',
     stack: [
       // leggo
-      { name: 'PHP', icon: 'php-icon' },
-      { name: 'Laravel', icon: 'laravel-icon' },
-      { name: 'Redis', icon: 'redis-icon' },
-      { name: 'GCP', icon: 'gcp-icon' },
-      { name: 'MySQL', icon: 'mysql-icon' },
-      { name: 'Docker', icon: 'docker-icon' },
-      { name: 'Vue', icon: 'vue-icon' },
-      { name: 'TailwindCSS', icon: 'tailwind-icon' },
+      backendDict['PHP'],
+      backendDict['Laravel'],
+      backendDict['Redis'],
+      devOpsDict['GCP'],
+      backendDict['MySQL'],
+      devOpsDict['Docker'],
+      frontendDict['Vue'],
+      frontendDict['Tailwind CSS'],
       { name: '/', icon: '' },
       // groundlink
-      { name: 'PHP', icon: 'php-icon' },
-      { name: 'Node.js', icon: 'nodejs-icon' },
-      { name: 'JavaScript', icon: 'javascript-icon' },
-      { name: 'jQuery', icon: 'jquery-icon' },
-      { name: 'MySQL', icon: 'mysql-icon' },
-      { name: 'WebSocket', icon: '' },
+      backendDict['PHP'],
+      backendDict['Node.js'],
+      frontendDict['JavaScript'],
+      frontendDict['jQuery'],
+      backendDict['MySQL'],
+      otherDict['WebSocket'],
       { name: '/', icon: '' },
       // casino
-      { name: 'Node.js', icon: 'nodejs-icon' },
-      { name: 'NestJS', icon: 'nestjs-icon' },
-      { name: 'TypeScript', icon: 'typescript-icon' },
-      { name: 'Redis', icon: 'redis-icon' },
-      { name: 'MySQL', icon: 'mysql-icon' },
-      { name: 'Microservices', icon: '' },
-      { name: 'PostgreSQL', icon: 'postgresql-icon' },
+      backendDict['Node.js'],
+      backendDict['NestJS'],
+      frontendDict['TypeScript'],
+      backendDict['Redis'],
+      backendDict['MySQL'],
+      otherDict['Microservices'],
+      backendDict['PostgreSQL'],
     ],
   },
   {
@@ -70,20 +99,20 @@ export const timeline: TimelineListItem[] = [
     description:
       'Integrated third-party casino game providers into an existing gaming platform while leading the support team responsible for rapid hotfix deployment and production issue resolution. Additionally, implemented the end-to-end integration of live sports data services, ensuring real-time accuracy, stability, and seamless functionality across the platform.',
     stack: [
-      { name: 'PHP', icon: 'php-icon' },
-      { name: 'Laravel', icon: 'laravel-icon' },
-      { name: 'Vue', icon: 'vue-icon' },
-      { name: 'MySQL', icon: 'mysql-icon' },
-      { name: 'VirtualBox', icon: 'virtualbox-icon' },
-      { name: 'CentOS', icon: 'centos-icon' },
-      { name: 'Ubuntu', icon: 'ubuntu-icon' },
-      { name: 'Node.js', icon: 'nodejs-icon' },
-      { name: 'JavaScript', icon: 'javascript-icon' },
-      { name: 'jQuery', icon: 'jquery-icon' },
-      { name: 'WebSocket', icon: '' },
-      { name: 'CSS3', icon: 'css3-icon' },
-      { name: 'Apache', icon: 'apache-icon' },
-      { name: 'Nginx', icon: 'nginx-icon' },
+      backendDict['PHP'],
+      backendDict['Laravel'],
+      frontendDict['Vue'],
+      backendDict['MySQL'],
+      devOpsDict['CentOS'],
+      devOpsDict['Ubuntu'],
+      backendDict['Node.js'],
+      frontendDict['JavaScript'],
+      frontendDict['jQuery'],
+      otherDict['WebSocket'],
+      frontendDict['CSS3'],
+      backendDict['Apache'],
+      backendDict['Nginx'],
+      devOpsDict['VirtualBox'],
     ],
   },
   {
@@ -94,15 +123,15 @@ export const timeline: TimelineListItem[] = [
     description:
       'Maintained and enhanced a pre-existing stock trading platform by integrating real-time market price data into the remote server infrastructure and leading a comprehensive UI revamp to improve usability, performance, and visual clarity. This work required deep familiarity with data feeds, responsive design, and production-level system maintenance to ensure a stable and intuitive trading experience.',
     stack: [
-      { name: 'Python', icon: 'python-icon' },
-      { name: 'Django', icon: 'django-icon' },
-      { name: 'JavaScript', icon: 'javascript-icon' },
-      { name: 'CSS3', icon: 'css3-icon' },
-      { name: 'jQuery', icon: 'jquery-icon' },
-      { name: 'Vagrant', icon: 'vagrant-icon' },
-      { name: 'Ubuntu', icon: 'ubuntu-icon' },
-      { name: 'PostgreSQL', icon: 'postgresql-icon' },
-      { name: 'WebSocket', icon: '' },
+      backendDict['Python'],
+      backendDict['Django'],
+      frontendDict['JavaScript'],
+      frontendDict['CSS3'],
+      frontendDict['jQuery'],
+      devOpsDict['Vagrant'],
+      devOpsDict['Ubuntu'],
+      backendDict['PostgreSQL'],
+      otherDict['WebSocket'],
     ],
     link: 'https://mftgroup.com.ph/',
   },
@@ -114,13 +143,13 @@ export const timeline: TimelineListItem[] = [
     description:
       'Completed an intensive web development bootcamp that established a solid foundation in PHP, MySQL, HTML, CSS, Bootstrap, and Laravel. The program emphasized practical, project-based learning, enabling me to build full-stack applications, understand core backend and frontend concepts, and develop the technical discipline that shaped the early stages of my web development career.',
     stack: [
-      { name: 'HTML5', icon: 'html5-icon' },
-      { name: 'CSS3', icon: 'css3-icon' },
-      { name: 'JavaScript', icon: 'javascript-icon' },
-      { name: 'jQuery', icon: 'jquery-icon' },
-      { name: 'PHP', icon: 'php-icon' },
-      { name: 'MySQL', icon: 'mysql-icon' },
-      { name: 'Laravel', icon: 'laravel-icon' },
+      frontendDict['HTML5'],
+      frontendDict['CSS3'],
+      frontendDict['JavaScript'],
+      frontendDict['jQuery'],
+      backendDict['PHP'],
+      backendDict['MySQL'],
+      backendDict['Laravel'],
     ],
     link: 'https://john-dunglao-dev.github.io/developer-ako/',
   },
