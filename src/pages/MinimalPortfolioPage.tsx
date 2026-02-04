@@ -129,7 +129,14 @@ function MinimalPortfolioPage() {
         </p>
 
         <p className="mb-4">
-          My recent role was a Senior Web Developer in <strong>FoodByUs</strong>{' '}
+          My recent role was a Senior Web Developer in{' '}
+          <a
+            href="https://foodbyus.com.au"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            FoodByUs
+          </a>{' '}
           where I am more focused in FrontEnd development as it was my previous
           weakness. I have been able to learn and adapt quickly to new
           technologies and tools to deliver high-quality solutions that meet
