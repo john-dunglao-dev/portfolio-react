@@ -5,6 +5,7 @@ import {
   devOpsSkills,
   otherSkills,
   type ISkill,
+  tools,
 } from '../../skills/models/Skill';
 
 const skillReduce = (acc: Record<string, ISkill>, skill: ISkill) => {
@@ -29,7 +30,26 @@ const devOpsDict = devOpsSkills.reduce(
 
 const otherDict = otherSkills.reduce(skillReduce, {} as Record<string, ISkill>);
 
+const toolsDict = tools.reduce(skillReduce, {} as Record<string, ISkill>);
+
 export const timeline: TimelineListItem[] = [
+  {
+    from: 'Feb 2026',
+    to: 'Present',
+    title: 'Senior Frontend Developer (VueJS)',
+    company: 'DigiPlus Interactive Corp.',
+    description:
+      'A premier, publicly listed digital entertainment and iGaming company in the Philippines that holds a dominant 40–50% market share in the local gaming sector. Transitioning from a traditional retail footprint, the company operates a multi-billion-peso tech ecosystem serving over 40 million registered users through market-leading platforms like BingoPlus, ArenaPlus, and GameZone. Driven by a world-class IT infrastructure and data analytics, DigiPlus specializes in high-scale digital bingo, 24/7 sports betting, and localized e-casino applications, while aggressively expanding its proprietary entertainment technologies into international regulated markets.',
+    stack: [
+      frontendDict['Vue'],
+      frontendDict['JavaScript'],
+      frontendDict['TypeScript'],
+      backendDict['Node.js'],
+      toolsDict['Cursor AI'],
+      toolsDict['Claude'],
+    ],
+    link: 'https://digiplus.com.ph/',
+  },
   {
     from: 'Jan 2023',
     to: 'Sept 2025',
@@ -52,6 +72,7 @@ export const timeline: TimelineListItem[] = [
       frontendDict['Tailwind CSS'],
       devOpsDict['Ubuntu'],
       devOpsDict['Nginx'],
+      toolsDict['Cursor AI'],
     ],
     link: 'https://foodbyus.com',
   },

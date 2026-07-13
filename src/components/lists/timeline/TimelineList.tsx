@@ -3,6 +3,14 @@ import { Transition } from '@headlessui/react';
 import SkillList from '../skills/SkillList';
 
 function TimelineList({ items, highlight = '' }: Timeline) {
+  const normalizeSkillTerm = (value: string) =>
+    value.toLowerCase().replaceAll('/', '').trim();
+  const highlightTerms = Array.isArray(highlight)
+    ? highlight.map((item) => normalizeSkillTerm(item)).filter(Boolean)
+    : highlight
+      ? [normalizeSkillTerm(highlight)]
+      : [];
+
   return (
     <ul className="space-y-10 border-l border-secondary/20">
       {items.map((item, index) => (
@@ -16,10 +24,12 @@ function TimelineList({ items, highlight = '' }: Timeline) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
           show={
-            highlight === '' ||
-            (highlight !== '' &&
+            highlightTerms.length === 0 ||
+            (highlightTerms.length > 0 &&
               item?.stack?.some((i) =>
-                i.name.toLowerCase().includes(highlight.toLowerCase())
+                highlightTerms.some((term) =>
+                  normalizeSkillTerm(i.name).includes(term)
+                )
               ))
           }
         >

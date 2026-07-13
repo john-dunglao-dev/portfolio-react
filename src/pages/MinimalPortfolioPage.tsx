@@ -4,23 +4,62 @@ import {
   GithubLogoIcon,
   LinkedinLogoIcon,
 } from '@phosphor-icons/react';
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxOption,
+  ComboboxOptions,
+} from '@headlessui/react';
 import TimelineList from '../components/lists/timeline/TimelineList';
 import { timeline } from '../components/lists/timeline/models/TimelineData';
 import ContactForm from '../components/forms/ContactForm';
 import ThemeChanger from '../components/layouts/ThemeChanger';
 import MouseFollower from '../components/layouts/MouseFollower';
 import myCv from '../assets/pdfs/john-florentino-dunglao-cv.pdf';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import SkillList from '../components/lists/skills/SkillList';
 import {
   backendSkills,
   devOpsSkills,
   frontendSkills,
   otherSkills,
+  tools,
 } from '../components/lists/skills/models/Skill';
 
 function MinimalPortfolioPage() {
   const [searchSkill, setSearchSkill] = useState<string>('');
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  const normalizeSkillTerm = (value: string) =>
+    value.replaceAll('/', '').trim();
+
+  const allSkillOptions = useMemo(() => {
+    const allSkills = [
+      ...frontendSkills,
+      ...backendSkills,
+      ...devOpsSkills,
+      ...otherSkills,
+      ...timeline.flatMap((item) => item.stack ?? []),
+    ];
+
+    return Array.from(
+      new Set(allSkills.map((skill) => normalizeSkillTerm(skill.name)))
+    ).sort((a, b) => a.localeCompare(b));
+  }, []);
+
+  const filteredSkillOptions = useMemo(() => {
+    const query = searchSkill.trim().toLowerCase();
+
+    return allSkillOptions.filter(
+      (skill) =>
+        !selectedSkills.some(
+          (selected) => selected.toLowerCase() === skill.toLowerCase()
+        ) &&
+        (query === '' || skill.toLowerCase().includes(query))
+    );
+  }, [allSkillOptions, searchSkill, selectedSkills]);
+
+  const visibleSelectedSkills = selectedSkills.slice(0, 4);
+  const overflowSkillCount = Math.max(selectedSkills.length - 4, 0);
 
   return (
     <main className="grid grid-cols-1 lg:grid-cols-12 gap-4 py-6 selection:bg-selection">
@@ -129,20 +168,22 @@ function MinimalPortfolioPage() {
         </p>
 
         <p className="mb-4">
-          My recent role was a Senior Web Developer in{' '}
+          My most recent role was as a Senior Web Developer at{' '}
           <a
-            href="https://foodbyus.com.au"
+            href="https://www.digiplus.com.ph"
             target="_blank"
             rel="noopener noreferrer"
           >
-            FoodByUs
+            DigiPlus Interactive Corp.
           </a>{' '}
-          where I am more focused in FrontEnd development as it was my previous
-          weakness. I have been able to learn and adapt quickly to new
-          technologies and tools to deliver high-quality solutions that meet
-          business needs. Notable achievements include reducing the artifact{' '}
-          <em>build time from 12 minutes to 3 minutes</em> by optimizing the{' '}
-          <em> package.json</em> file.
+          where I owned feature development across seven enterprise back-office
+          platforms serving core business domains, including Marketing,
+          Operations, and eKYC. In this role, I drove engineering efficiency by
+          refactoring reusable boilerplates and modernizing legacy modules to
+          accelerate application deployment. Additionally, I established shared
+          AI-assisted development rules and engineering conventions that were
+          adopted team-wide to significantly improve development consistency and
+          code quality.
         </p>
 
         <p>
@@ -156,18 +197,73 @@ function MinimalPortfolioPage() {
           Experience
         </h4>
 
-        <div>
-          <input
-            type="text"
-            placeholder="Search skill to highlight..."
-            value={searchSkill}
-            onChange={(e) => setSearchSkill(e.target.value)}
-            className="w-full mb-4 py-2 px-4 border border-secondary/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 ease-in-out bg-background text-foreground"
-          />
+        <div className="mb-4 relative">
+          <Combobox
+            value={selectedSkills}
+            onChange={(skills: string[]) => {
+              setSelectedSkills(skills);
+              setSearchSkill('');
+            }}
+            multiple
+          >
+            <div className="w-full py-2 px-3 border border-secondary/30 rounded-lg focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition-all duration-300 ease-in-out bg-background text-foreground flex flex-wrap items-center gap-2">
+              {visibleSelectedSkills.map((skill) => (
+                <span
+                  key={skill}
+                  className="inline-flex items-center gap-1 py-1 px-2 text-xs rounded-md border border-primary/30 bg-primary/10 text-primary"
+                >
+                  {skill}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedSkills((prevSkills) =>
+                        prevSkills.filter((item) => item !== skill)
+                      );
+                    }}
+                    className="text-primary/80 hover:text-primary leading-none"
+                    aria-label={`Remove ${skill}`}
+                  >
+                    x
+                  </button>
+                </span>
+              ))}
+
+              {overflowSkillCount > 0 && (
+                <span className="inline-flex items-center py-1 px-2 text-xs rounded-md border border-secondary/30 bg-secondary/10 text-secondary">
+                  +{overflowSkillCount}
+                </span>
+              )}
+
+              <ComboboxInput
+                aria-label="Search and select skills"
+                placeholder="Search skill to highlight..."
+                value={searchSkill}
+                onChange={(e) => setSearchSkill(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Backspace' && searchSkill.trim() === '') {
+                    setSelectedSkills((prevSkills) => prevSkills.slice(0, -1));
+                  }
+                }}
+                className="flex-1 min-w-[200px] bg-transparent focus:outline-none"
+              />
+            </div>
+
+            <ComboboxOptions className="absolute z-10 mt-1 w-full max-h-64 overflow-auto rounded-lg border border-secondary/30 bg-background shadow-lg empty:hidden">
+              {filteredSkillOptions.map((skill) => (
+                <ComboboxOption
+                  key={skill}
+                  value={skill}
+                  className="px-3 py-2 cursor-pointer data-focus:bg-selection/30 transition-colors duration-200 ease-in-out"
+                >
+                  {skill}
+                </ComboboxOption>
+              ))}
+            </ComboboxOptions>
+          </Combobox>
         </div>
 
         <div>
-          <TimelineList items={timeline} highlight={searchSkill} />
+          <TimelineList items={timeline} highlight={selectedSkills} />
         </div>
       </section>
 
@@ -180,28 +276,33 @@ function MinimalPortfolioPage() {
           <div>
             Frontend <span className="hidden lg:inline">Skills</span>
           </div>
-          <SkillList items={frontendSkills} highlight={searchSkill} />
+          <SkillList items={frontendSkills} highlight={selectedSkills} />
         </div>
 
         <div className="space-y-2">
           <div>
             Backend <span className="hidden lg:inline">Skills</span>
           </div>
-          <SkillList items={backendSkills} highlight={searchSkill} />
+          <SkillList items={backendSkills} highlight={selectedSkills} />
         </div>
 
         <div className="space-y-2">
           <div>
             DevOps <span className="hidden lg:inline">Skills</span>
           </div>
-          <SkillList items={devOpsSkills} highlight={searchSkill} />
+          <SkillList items={devOpsSkills} highlight={selectedSkills} />
+        </div>
+
+        <div className="space-y-2">
+          <div>Tools used</div>
+          <SkillList items={tools} highlight={selectedSkills} />
         </div>
 
         <div className="space-y-2">
           <div>
             Other <span className="hidden lg:inline">Skills</span>
           </div>
-          <SkillList items={otherSkills} highlight={searchSkill} />
+          <SkillList items={otherSkills} highlight={selectedSkills} />
         </div>
       </section>
 

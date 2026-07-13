@@ -12,5 +12,5 @@ export interface TimelineListItem {
 
 export interface Timeline {
   items: TimelineListItem[];
-  highlight?: string;
+  highlight?: string | string[];
 }

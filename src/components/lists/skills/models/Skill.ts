@@ -56,3 +56,9 @@ export const otherSkills: ISkill[] = [
   { name: 'Test Driven Development (TDD)', icon: null },
   { name: 'API Integration', icon: null },
 ];
+
+export const tools: ISkill[] = [
+  { name: 'Cursor AI', icon: null },
+  { name: 'Github Copilot', icon: null },
+  { name: 'Claude', icon: null },
+];
